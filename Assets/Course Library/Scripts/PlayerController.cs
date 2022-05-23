@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        powerupIndicator.gameObject.SetActive(false);
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("FocalPoint");
 
@@ -24,6 +25,9 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        playerRb.AddForce(focalPoint.transform.right * speed * horizontalInput);
     }
 
     private void OnTriggerEnter(Collider other)
