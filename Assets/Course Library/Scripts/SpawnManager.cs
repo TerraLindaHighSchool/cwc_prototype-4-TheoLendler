@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -9,12 +10,22 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
     public GameObject powerupPrefab;
+    public TextMeshProUGUI gameOverText;
+    public bool isGameActive;
     // Start is called before the first frame update
     void Start()
     {
+        isGameActive = true;
         SpawnEnemyWave(waveNumber);
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
+
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+    }
+
 
     Vector3 GenerateSpawnPosition()
     {
@@ -30,9 +41,12 @@ public class SpawnManager : MonoBehaviour
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount <= 0)
         {
-            waveNumber++;
-            SpawnEnemyWave(waveNumber);
-            Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+            while (isGameActive)
+            {
+                waveNumber++;
+                SpawnEnemyWave(waveNumber);
+                Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+            }
         }
 
     }
@@ -46,4 +60,9 @@ public class SpawnManager : MonoBehaviour
         
         
     }
+
+    
+
+
+
 }
