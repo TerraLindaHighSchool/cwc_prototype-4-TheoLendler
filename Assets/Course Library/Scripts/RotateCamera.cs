@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : MonoBehaviour
+public class RotateCamera : MonoBehaviour
 {
-    public SpawnManager SpawnManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +14,6 @@ public class Barrier : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            SpawnManager.GameOver();
-        }
+  
     }
 }
