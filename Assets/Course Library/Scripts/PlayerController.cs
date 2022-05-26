@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+    public Canvas gameOverCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
         powerupIndicator.gameObject.SetActive(false);
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("FocalPoint");
+        gameOverCanvas.gameObject.SetActive(false);
 
     }
 
@@ -28,6 +32,12 @@ public class PlayerController : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal");
         playerRb.AddForce(focalPoint.transform.right * speed * horizontalInput);
+
+
+        if (transform.position.y < -10)
+        {
+            gameOverCanvas.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

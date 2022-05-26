@@ -12,15 +12,16 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         SpawnEnemyWave(waveNumber);
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
 
-    Vector3 GenerateSpawnPosition()
+     private Vector3 GenerateSpawnPosition()
     {
         float spawnPosX = Random.Range(-SpawnRange, SpawnRange);
         float spawnPosZ = Random.Range(-SpawnRange, SpawnRange);
-        Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosX);
+        Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
         return randomPos;
     }
 
@@ -39,11 +40,15 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemyWave(int enemiesToSpawn)
     {
-        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            for (int i = 0; i < enemiesToSpawn; i++)
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
         }
+        }
+        
         
         
     }
+
 }
