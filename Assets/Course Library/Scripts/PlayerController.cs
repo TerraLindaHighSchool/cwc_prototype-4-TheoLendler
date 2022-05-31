@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
     public Canvas gameOverCanvas;
+    public Button restartButton;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -37,6 +43,8 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -10)
         {
             gameOverCanvas.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
+
         }
     }
 

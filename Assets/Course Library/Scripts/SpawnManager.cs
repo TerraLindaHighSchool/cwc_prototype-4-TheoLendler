@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
+
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
@@ -9,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
     public GameObject powerupPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,9 @@ public class SpawnManager : MonoBehaviour
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
 
-     private Vector3 GenerateSpawnPosition()
+    
+
+    private Vector3 GenerateSpawnPosition()
     {
         float spawnPosX = Random.Range(-SpawnRange, SpawnRange);
         float spawnPosZ = Random.Range(-SpawnRange, SpawnRange);
