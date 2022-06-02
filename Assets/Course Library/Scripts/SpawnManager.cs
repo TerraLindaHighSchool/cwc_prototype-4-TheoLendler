@@ -12,11 +12,12 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
     public GameObject powerupPrefab;
+    private GameManager gameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         SpawnEnemyWave(waveNumber);
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
@@ -34,6 +35,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.gameActive) return;
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount <= 0)
         {

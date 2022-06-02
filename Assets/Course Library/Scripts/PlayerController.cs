@@ -12,26 +12,27 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
-    public Canvas gameOverCanvas;
-    public Button restartButton;
+    public GameObject gameOverCanvas;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         powerupIndicator.gameObject.SetActive(false);
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("FocalPoint");
-        gameOverCanvas.gameObject.SetActive(false);
-
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.gameActive) return;
+
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
@@ -42,9 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y < -10)
         {
-            gameOverCanvas.gameObject.SetActive(true);
-            restartButton.gameObject.SetActive(true);
-
+            gameOverCanvas.SetActive(true);
         }
     }
 
